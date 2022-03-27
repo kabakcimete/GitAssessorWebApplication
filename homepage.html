@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Git Assessor</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <section class="header">
+      <div class="title">
+        <h1>Git Assessor</h1>
+      </div>
+
+      <div class="enterlink">
+        <input type="text" id="addrepo" placeholder="Enter Repository Link" />
+      </div>
+      <div class="addlink">
+        <input
+          type="button"
+          id="addrepolink"
+          value="Add"
+          onclick="addToList()"
+        />
+      </div>
+
+      <div class="coloumns">
+        <div class="rules">
+          <h2>Rules</h2>
+          <p>-Choose your rules-</p>
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule1"
+            name="rule1"
+            value="1"
+          />
+          <label for="Rule1">does every contributor have commit</label><br />
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule2"
+            name="rule2"
+            value="2"
+          />
+          <label for="Rule2">does repository have read_me file</label><br />
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule3"
+            name="rule3"
+            value="3"
+          />
+          <label for="Rule3">does every commit has comment</label><br />
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule4"
+            name="rule4"
+            value="4"
+          />
+          <label for="Rule4">does every contributor have feature branch</label
+          ><br />
+        </div>
+        <div class="list">
+          <h2>Repository Links</h2>
+          <p>-Choose Repo links to remove-</p>
+          <div id="links"></div>
+          <div id="removebtn">
+            <input
+              type="button"
+              id="removerepolink"
+              value="Remove"
+              style="display: none"
+              onclick="removeRepo()"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="assess">
+        <input
+          type="submit"
+          class="assess-btn"
+          onclick="valueSender()"
+          value="Assess"
+        />
+      </div>
+    </section>
+  </body>
+
+  <script>
+    function valueSender() {
+      var ourLink = "https://l5n5ve.deta.dev/git_assessor/?";
+      var boxLink = document.getElementsByClassName("linkbox");
+      var chklist = document.getElementsByClassName("cbx");
+      console.log(chklist);
+      var ii;
+      var j;
+      var text = "";
+      var ruletext = "rules=";
+
+      for (j = 0; j < chklist.length; j++) {
+        if (chklist.length == 1) {
+          if (chklist[j].checked) {
+            console.log(chklist[j].value);
+            ruletext += chklist[j].value;
+          }
+        } else {
+          if (chklist[j].checked) {
+            console.log(chklist[j].value);
+            ruletext += chklist[j].value + "%2C";
+          }
+        }
+      }
+      if (ruletext.slice(-3) == "%2C") {
+        ruletext = ruletext.slice(0, -3);
+      }
+      ruletext += "&";
+      text += ruletext;
+
+      counter = 1;
+      //text += "rules=1%2C2%2C3&";
+
+      console.log(boxLink);
+
+      const mapObj = {
+        ":": "%3A",
+        "/": "%2F",
+      };
+      console.log(boxLink.length);
+      for (ii = 0; ii < boxLink.length; ii++) {
+        text += "link" + counter + "=";
+        text += boxLink[ii].value;
+        text = text.replace(/[/:]/g, (c) => mapObj[c]);
+
+        console.log(text);
+        text += "&";
+        counter += 1;
+      }
+
+      text = text.slice(0, -1);
+      ourLink = ourLink + text;
+      console.log(text);
+      console.log(ourLink);
+
+      var ourRequest = new XMLHttpRequest();
+      ourRequest.open("GET", ourLink, true);
+
+      ourRequest.onload = function () {
+        if (ourRequest.readyState == 4 && ourRequest.status == 200) {
+          var ourData = JSON.parse(ourRequest.responseText);
+          console.log(ourData);
+          renderHTML(ourData);
+        }
+      };
+
+      ourRequest.send();
+    }
+
+    function renderHTML(data) {
+      sessionStorage.setItem("items", JSON.stringify(data));
+      console.log(sessionStorage);
+
+      window.location.href = "assess.html";
+    }
+
+    var i = 1;
+    function addToList() {
+      if (document.getElementById("addrepo").value !== "") {
+        var newCheckbox = document.createElement("input");
+        newCheckbox.classList.add("linkbox");
+        newCheckbox.type = "checkbox";
+        newCheckbox.id = i;
+        newCheckbox.value = document.getElementById("addrepo").value;
+        document.getElementById("links").appendChild(newCheckbox);
+
+        var label = document.createElement("label");
+        label.setAttribute("for", i);
+        label.setAttribute("id", i);
+        label.appendChild(
+          document.createTextNode(document.getElementById("addrepo").value)
+        );
+
+        document.getElementById("links").appendChild(label);
+        document
+          .getElementById("links")
+          .appendChild(document.createElement("br"));
+
+        document.getElementById("addrepo").value = "";
+
+        document.getElementById("removerepolink").style.display = "inline";
+
+        i = i + 1;
+      }
+    }
+
+    function removeRepo() {
+      var chk = document.getElementById("links").children;
+
+      for (var j = 0; j < chk.length; j++) {
+        if (chk[j].tagName == "INPUT" && chk[j].type == "checkbox") {
+          if (chk[j].checked) {
+            chk[j + 2].remove();
+            chk[j + 1].remove();
+            chk[j].remove();
+          }
+        }
+      }
+    }
+  </script>
+</html>
