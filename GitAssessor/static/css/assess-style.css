@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Roboto, Arial, sans-serif;
+}
+.header {
+  min-height: 100vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    ),
+    url(../img/background.jpg);
+  background-position: center;
+  background-size: cover;
+}
+h2 {
+  color: white;
+}
+
+table {
+  padding: 5px;
+}
+th {
+  border-bottom: 1px solid white;
+  padding: 5px;
+  text-align: center;
+}
+td {
+  padding: 5px;
+  text-align: center;
+}
+#tab {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background-color: black;
+  border: 1px solid #30363d !important;
+}
+
+/* Style the buttons that are used to open the tab content */
+#tab button {
+  color: #f0f6fc;
+  background-color: inherit;
+  border-left: 1px solid #30363d;
+  border-right: 1px solid #30363d;
+  border-top: none;
+  border-bottom: none;
+  border-radius: 4px;
+  float: left;
+  outline: none;
+  cursor: pointer;
+  padding: 20px 20px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+#tab button:hover {
+  color: rgb(154, 152, 152);
+}
+
+/* Create an active/current tablink class */
+#tab button.active {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+#tabcontainer {
+  margin: 2rem 2rem;
+  color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: none;
+}
+.tabcontent {
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+.tabcontent > * {
+  /*background: linear-gradient(
+    to bottom right,
+    rgba(7, 7, 7, 0.7),
+    rgba(97, 86, 250, 0.3)
+  );*/
+  border: 1px solid #30363d !important;
+  background-image: linear-gradient(180deg, rgb(13 17 23 / 0%), #0d1117),
+    linear-gradient(70deg, rgb(56 139 253 / 15%) 32%, rgb(46 160 67 / 15%));
+  border-radius: 6px;
+  flex: 1 1 33%;
+}
+.rule {
+  margin: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+.rule > * {
+  flex: 1 1 100%;
+}
+.rulefont {
+  font-weight: bold;
+  font-size: x-large;
+}
+.rule ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  justify-content: center;
+}
+.rule li {
+  padding-bottom: 5px;
+}
+.table {
+  margin: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table > * {
+  padding: 2rem 2rem;
+  flex: 1 1 100%;
+}
+.tick {
+  color: greenyellow;
+}
+.cross {
+  color: red;
+}
+.canvas {
+  margin: 0 1rem;
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+canvas {
+  background: linear-gradient(
+    to top right,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  max-width: 50%;
+  border-radius: 6px;
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
