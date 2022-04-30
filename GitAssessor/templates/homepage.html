@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Git Assessor</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <section class="header">
+      <div class="title">
+        <h1>Git Assessor</h1>
+      </div>
+
+      <div class="enterlink">
+        <input type="text" id="addrepo" placeholder="Enter Repository Link" />
+      </div>
+      <div class="addlink">
+        <input
+          type="button"
+          id="addrepolink"
+          value="Add"
+          onclick="addToList()"
+        />
+      </div>
+
+      <div class="coloumns">
+        <div class="rules">
+          <h2>Rules</h2>
+          <p>-Choose your rules-</p>
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule1"
+            name="rule1"
+            value="1"
+          />
+          <label for="Rule1">does every contributor have commit</label><br />
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule2"
+            name="rule2"
+            value="2"
+          />
+          <label for="Rule2">does repository have read_me file</label><br />
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule3"
+            name="rule3"
+            value="3"
+          />
+          <label for="Rule3">does every commit has comment</label><br />
+          <input
+            class="cbx"
+            type="checkbox"
+            id="rule4"
+            name="rule4"
+            value="4"
+          />
+          <label for="Rule4">does every contributor have feature branch</label
+          ><br />
+        </div>
+        <div class="list">
+          <h2>Repository Links</h2>
+          <p>-Choose Repo links to remove-</p>
+          <div id="links"></div>
+          <div id="removebtn">
+            <input
+              type="button"
+              id="removerepolink"
+              value="Remove"
+              style="display: none"
+              onclick="removeRepo()"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="assess">
+        <input
+          type="submit"
+          class="assess-btn"
+          onclick="valueSender()"
+          value="Assess"
+        />
+      </div>
+    </section>
+  </body>
+
+  <script src="{% static 'js/homejspage.js' %}">
+   
+  </script>
+</html>
