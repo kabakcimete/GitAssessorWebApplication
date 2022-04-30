@@ -1,43 +1,28 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: Roboto, Arial, sans-serif;
-}
-.header {
-  min-height: 100vh;
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7)
-    ),
-    url(../img/background.jpg);
-  background-position: center;
-  background-size: cover;
-}
 h2 {
   color: white;
 }
 
 table {
   padding: 5px;
+  text-align: center;
 }
 th {
   border-bottom: 1px solid white;
+  border-top: transparent !important;
   padding: 5px;
   text-align: center;
+  color: white;
 }
 td {
   padding: 5px;
   text-align: center;
+  color: white;
 }
 #tab {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  background-color: black;
-  border: 1px solid #30363d !important;
+  background-color: transparent;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -102,6 +87,7 @@ td {
   align-items: center;
   justify-content: start;
   flex-wrap: wrap;
+  text-align: center;
 }
 .rule > * {
   flex: 1 1 100%;
@@ -133,7 +119,7 @@ td {
   color: greenyellow;
 }
 .cross {
-  color: red;
+  color: red !important;
 }
 .canvas {
   margin: 0 1rem;

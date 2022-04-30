@@ -120,7 +120,7 @@ var answerContainer = document.getElementById("answer");
             if (array[j][k] == true) {
               table += "<td><span class='tick'>&#10004;</span></td>";
             } else if (array[j][k] == false) {
-              table += "<td><span class='cross'>&#10006;</span></td>";
+              table += "<td><span class='cross'>&#10005;</span></td>";
             } else {
               table += "<td>" + array[j][k] + "</td>";
             }

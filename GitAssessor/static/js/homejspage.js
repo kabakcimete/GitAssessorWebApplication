@@ -70,7 +70,7 @@ function valueSender() {
     sessionStorage.setItem("items", JSON.stringify(data));
     console.log(sessionStorage);
 
-    window.location.href = "assess";
+    window.location.href = "../assess";
   }
 
   var i = 1;

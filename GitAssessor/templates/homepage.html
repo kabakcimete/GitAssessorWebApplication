@@ -1,13 +1,9 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Git Assessor</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-  </head>
-  <body>
+    {% block head%}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homestyle.css' %}" />
+    {%endblock head%}
+    {%block content%}
     <section class="header">
       <div class="title">
         <h1>Git Assessor</h1>
@@ -88,9 +84,9 @@
         />
       </div>
     </section>
-  </body>
-
+  {% endblock content %}
+  {%block js%}
   <script src="{% static 'js/homejspage.js' %}">
    
   </script>
-</html>
+  {%endblock js%}
