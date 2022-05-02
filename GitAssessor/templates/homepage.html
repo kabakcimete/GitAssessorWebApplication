@@ -19,45 +19,46 @@
           value="Add"
           onclick="addToList()"
         />
-      </div>
 
+      </div>
+      
       <div class="coloumns">
         <div class="rules">
           <h2>Rules</h2>
           <p>-Choose your rules-</p>
-          <input
-            class="cbx"
-            type="checkbox"
-            id="rule1"
-            name="rule1"
-            value="1"
-          />
-          <label for="Rule1">does every contributor have commit</label><br />
-          <input
-            class="cbx"
-            type="checkbox"
-            id="rule2"
-            name="rule2"
-            value="2"
-          />
-          <label for="Rule2">does repository have read_me file</label><br />
-          <input
-            class="cbx"
-            type="checkbox"
-            id="rule3"
-            name="rule3"
-            value="3"
-          />
-          <label for="Rule3">does every commit has comment</label><br />
-          <input
-            class="cbx"
-            type="checkbox"
-            id="rule4"
-            name="rule4"
-            value="4"
-          />
-          <label for="Rule4">does every contributor have feature branch</label
-          ><br />
+          {% for key,value in rules.items%}
+            {%if value in user_rules %}
+              <input
+              class="cbx"
+              type="checkbox"
+              id={{value}}
+              name={{value}}
+              value={{value}}
+              checked
+              />
+            {%else%}
+              <input
+              class="cbx"
+              type="checkbox"
+              id={{value}}
+              name={{value}}
+              value={{value}}
+              />
+            {%endif%}
+            <label for={{value}}>{{key}}</label><br />
+
+          {%endfor%}
+          {% if user.is_authenticated%}
+            <form method="POST" >
+              {% csrf_token %}
+              <div class="savebtn">
+              <input type="text" name="chkbox" id="chkbox" hidden/>
+              <input type="submit" id="sub" value="Save" onclick="savechk()"/>
+            </div>
+            </form>
+          {%endif%}
+
+
         </div>
         <div class="list">
           <h2>Repository Links</h2>
@@ -74,7 +75,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="assess">
         <input
           type="submit"
@@ -83,6 +84,7 @@
           value="Assess"
         />
       </div>
+
     </section>
   {% endblock content %}
   {%block js%}

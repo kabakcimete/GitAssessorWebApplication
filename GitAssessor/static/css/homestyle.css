@@ -1,6 +1,6 @@
 
 h1 {
-  padding: 5rem 0;
+  padding: 3rem 0;
   text-align: center;
   color: wheat;
   font-weight: bold;
@@ -79,4 +79,9 @@ label {
   background: #f44336;
   color: white;
   transition: 0.5s;
+}
+.savebtn{
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
 }

@@ -1,26 +1,58 @@
+// var checked_rules={user}
+// console.log(a.checked);
+
+function savechk(){
+  var chkboxlist = document.getElementById("chkbox");
+  var chklist = document.getElementsByClassName("cbx");
+  var chktext = ""
+  for (j = 0; j < chklist.length; j++) {
+    if (chklist.length == 1) {
+      if (chklist[j].checked) {
+        chktext+=chklist[j].value
+        
+      }
+    } else {
+      if (chklist[j].checked) {
+        chktext+=chklist[j].value
+        chktext+=","
+      }
+    }
+  }
+  chktext = chktext.slice(0,-1)
+  console.log(chktext)
+  chkboxlist.value = chktext
+  console.log(chkboxlist)
+}
+
 function valueSender() {
     var ourLink = "https://l5n5ve.deta.dev/git_assessor/?";
     var boxLink = document.getElementsByClassName("linkbox");
     var chklist = document.getElementsByClassName("cbx");
+
+
     console.log(chklist);
     var ii;
     var j;
     var text = "";
     var ruletext = "rules=";
 
+
     for (j = 0; j < chklist.length; j++) {
       if (chklist.length == 1) {
         if (chklist[j].checked) {
           console.log(chklist[j].value);
           ruletext += chklist[j].value;
+          
         }
       } else {
         if (chklist[j].checked) {
           console.log(chklist[j].value);
           ruletext += chklist[j].value + "%2C";
+
         }
       }
     }
+    console.log(ruletext)
     if (ruletext.slice(-3) == "%2C") {
       ruletext = ruletext.slice(0, -3);
     }
@@ -46,7 +78,6 @@ function valueSender() {
       text += "&";
       counter += 1;
     }
-
     text = text.slice(0, -1);
     ourLink = ourLink + text;
     console.log(text);
