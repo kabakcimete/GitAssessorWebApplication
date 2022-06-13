@@ -3,7 +3,7 @@ h2 {
 }
 
 table {
-  padding: 5px;
+  padding: 1rem 0;
   text-align: center;
 }
 th {
@@ -37,7 +37,7 @@ td {
   float: left;
   outline: none;
   cursor: pointer;
-  padding: 20px 20px;
+  padding: 10px 10px;
   transition: 0.3s;
 }
 

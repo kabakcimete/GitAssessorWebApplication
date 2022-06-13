@@ -11,10 +11,13 @@ from GitAssessorApp.models import Checkedrules
 
 def home(request):
 	rules={
-		"does every contributor have commit":"1",
-		"does repository have read_me file":"2",
-		"does every commit has comment":"3",
-		"does every contributor have feature branch":"4"
+		"Does every contributor have commit":"1",
+		"Does repository have read_me file":"2",
+		"Does every commit has comment":"3",
+		"Does every contributor have feature branch":"4",
+		"Does any contributor have a branch named head":"5",
+		"Does any contributor have a merge":"6",
+		"Does any contributor have a branch named origin/master":"7",
 	}
 	if request.user.is_authenticated:
 		loggeduser=request.user

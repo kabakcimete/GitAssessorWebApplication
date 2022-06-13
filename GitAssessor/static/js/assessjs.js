@@ -8,6 +8,9 @@ var answerContainer = document.getElementById("answer");
         "does repository have read_me file ",
         "does every commit has comment ",
         "does every contributor have feature branch ",
+        "Does any contributor have a branch named head ",
+        "Does any contributor have a merge ",
+        "Does any contributor have a branch named origin/master ",
       ];
 
       var reponame = Object.keys(answer);
@@ -20,6 +23,7 @@ var answerContainer = document.getElementById("answer");
       var rulelist = [];
       var arr = [];
       var result = [];
+      var totalGrade = [];
 
       for (var i = 0; i < reponame.length; i++) {
         var tabstring = "";
@@ -64,7 +68,17 @@ var answerContainer = document.getElementById("answer");
         } else if (noOfRules[i] == "feature_branch") {
           isthererule.push(rules[3]);
           rulelist.push(noOfRules[i]);
+        } else if (noOfRules[i] == "head_branch") {
+          isthererule.push(rules[4]);
+          rulelist.push(noOfRules[i]);
+        } else if (noOfRules[i] == "merge_check") {
+          isthererule.push(rules[5]);
+          rulelist.push(noOfRules[i]);
+        } else if (noOfRules[i] == "origin_master_branch") {
+          isthererule.push(rules[6]);
+          rulelist.push(noOfRules[i]);
         }
+
       }
       for (var i = 0; i < reponame.length; i++) {
         var tabcontent = "";
@@ -107,17 +121,40 @@ var answerContainer = document.getElementById("answer");
           .insertAdjacentHTML("beforeend", tabtable);
       }
 
+
       function createTable(array, size) {
         var table = "";
-        table += "<div class='table'><table><tr><th>Users</th>";
-        for (var i = 1; i < noOfRules.length; i++) {
-          table += "<th>Rule-" + i + "</th>";
+        var penalty=0;
+        var totalscore = 0;
+        console.log(rulelist.length);
+        for (var i=0;i<rulelist.length;i++){
+          console.log(penalty);
+          if (rulelist[i]=="head_branch" || rulelist[i]=="origin_master_branch"){
+            penalty=penalty+1;
+          }
         }
+        console.log(penalty);
+        var score = 100/parseFloat(rulelist.length-(penalty));
+        console.log(typeof(score));
+        console.log(score.toString());
+        console.log(score);
+        table += "<div class='table'><table><tr><th>Users</th>";
+        for (var i = 0; i < rulelist.length; i++) {
+          table += "<th>Rule " + (i+1) + "</th>";
+        }
+        //table="<th>G</th>";
         table += "</tr>";
         for (var j = 0; j < size.length; j++) {
           table += "<tr>";
           for (var k = 0; k < noOfRules.length; k++) {
+            console.log(totalscore);
             if (array[j][k] == true) {
+              if(noOfRules[k]=="head_branch" || noOfRules[k]=="origin_master_branch"){
+                totalscore = totalscore - score;
+              }
+              else{
+                totalscore = totalscore + score;
+              }
               table += "<td><span class='tick'>&#10004;</span></td>";
             } else if (array[j][k] == false) {
               table += "<td><span class='cross'>&#10005;</span></td>";
@@ -125,7 +162,13 @@ var answerContainer = document.getElementById("answer");
               table += "<td>" + array[j][k] + "</td>";
             }
           }
+          if (totalscore < 0){
+            totalscore = 0;
+          }
+          table+="<td>"+totalscore.toFixed(2)+"</td>";
           table += "</tr>";
+          totalGrade.push(totalscore.toString());
+          totalscore=0;
         }
         table += "</table></div>";
         return table;
@@ -268,7 +311,7 @@ var answerContainer = document.getElementById("answer");
             datasets: [
               {
                 backgroundColor: barColors,
-                data: newgrades,
+                data: totalGrade,
               },
             ],
           },
@@ -278,7 +321,7 @@ var answerContainer = document.getElementById("answer");
                 {
                   ticks: {
                     beginAtZero: true,
-                    max: noOfRules.length - 1,
+                    max: 100,
                   },
                 },
               ],
