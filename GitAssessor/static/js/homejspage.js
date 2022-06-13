@@ -25,7 +25,7 @@ function savechk(){
 }
 
 function valueSender() {
-    var ourLink = "https://l5n5ve.deta.dev/git_assessor/?";
+    var ourLink = "https://tvfqrp.deta.dev/git_assessor/?";
     var boxLink = document.getElementsByClassName("linkbox");
     var chklist = document.getElementsByClassName("cbx");
 

@@ -1,6 +1,6 @@
 
 h1 {
-  padding: 3rem 0;
+  padding: 2rem 0;
   text-align: center;
   color: wheat;
   font-weight: bold;
@@ -58,6 +58,7 @@ p {
 }
 label {
   margin: 10px;
+  font-size: 13px;
   color: white;
 }
 .assess {
@@ -85,3 +86,5 @@ label {
   flex-flow: column wrap;
   align-items: center;
 }
+
+
