@@ -1,5 +1,6 @@
 var answerContainer = document.getElementById("answer");
       var answer = JSON.parse(sessionStorage.getItem("items"));
+      var gradeScores = JSON.parse(sessionStorage.getItem("grades"));
       //var secondanswer = JSON.parse(answer);
       //console.log(answer);
       //console.log(answer);
@@ -12,7 +13,7 @@ var answerContainer = document.getElementById("answer");
         "Does any contributor have a merge ",
         "Does any contributor have a branch named origin/master ",
       ];
-
+      console.log(gradeScores);
       var reponame = Object.keys(answer);
       var noOfRules = Object.keys(answer[reponame[0]]);
       console.log(answer);
@@ -126,18 +127,18 @@ var answerContainer = document.getElementById("answer");
         var table = "";
         var penalty=0;
         var totalscore = 0;
-        console.log(rulelist.length);
+        //console.log(rulelist.length);
         for (var i=0;i<rulelist.length;i++){
-          console.log(penalty);
+          //console.log(penalty);
           if (rulelist[i]=="head_branch" || rulelist[i]=="origin_master_branch"){
             penalty=penalty+1;
           }
         }
-        console.log(penalty);
+        // console.log(penalty);
         var score = 100/parseFloat(rulelist.length-(penalty));
-        console.log(typeof(score));
-        console.log(score.toString());
-        console.log(score);
+        // console.log(typeof(score));
+        // console.log(score.toString());
+        // console.log(score);
         table += "<div class='table'><table><tr><th>Users</th>";
         for (var i = 0; i < rulelist.length; i++) {
           table += "<th>Rule " + (i+1) + "</th>";
@@ -147,13 +148,25 @@ var answerContainer = document.getElementById("answer");
         for (var j = 0; j < size.length; j++) {
           table += "<tr>";
           for (var k = 0; k < noOfRules.length; k++) {
-            console.log(totalscore);
+            console.log(k);
             if (array[j][k] == true) {
               if(noOfRules[k]=="head_branch" || noOfRules[k]=="origin_master_branch"){
-                totalscore = totalscore - score;
+                if (Object.keys(gradeScores).length == 0){
+
+                  totalscore = totalscore - score;
+                }
+                else{
+                  totalscore = totalscore - parseFloat(gradeScores[k-1]);
+                }
               }
               else{
-                totalscore = totalscore + score;
+                if (Object.keys(gradeScores).length == 0){
+
+                  totalscore = totalscore + score;
+                }
+                else{
+                  totalscore = totalscore + parseFloat(gradeScores[k-1]);
+                }
               }
               table += "<td><span class='tick'>&#10004;</span></td>";
             } else if (array[j][k] == false) {
@@ -165,7 +178,13 @@ var answerContainer = document.getElementById("answer");
           if (totalscore < 0){
             totalscore = 0;
           }
-          table+="<td>"+totalscore.toFixed(2)+"</td>";
+          if (Object.keys(gradeScores).length == 0){
+
+            table+="<td>"+totalscore.toFixed(2)+"</td>";
+          }
+          else{
+            table+="<td>"+totalscore.toFixed(2)+"</td>";
+          }
           table += "</tr>";
           totalGrade.push(totalscore.toString());
           totalscore=0;

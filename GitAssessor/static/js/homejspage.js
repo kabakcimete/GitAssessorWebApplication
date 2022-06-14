@@ -28,13 +28,16 @@ function valueSender() {
     var ourLink = "https://tvfqrp.deta.dev/git_assessor/?";
     var boxLink = document.getElementsByClassName("linkbox");
     var chklist = document.getElementsByClassName("cbx");
+    var grades = document.getElementsByClassName("grade");
 
-
+    console.log(grades[0].value);
+    
     console.log(chklist);
     var ii;
     var j;
     var text = "";
     var ruletext = "rules=";
+    var gradeArr=[];
 
 
     for (j = 0; j < chklist.length; j++) {
@@ -42,16 +45,31 @@ function valueSender() {
         if (chklist[j].checked) {
           console.log(chklist[j].value);
           ruletext += chklist[j].value;
+          if (grades[j].value == ""){
+            gradeArr.push(10);
+          }
+          else{
+            gradeArr.push(grades[j].value);
+
+          }
           
         }
       } else {
         if (chklist[j].checked) {
           console.log(chklist[j].value);
           ruletext += chklist[j].value + "%2C";
+          if (grades[j].value==""){
+            gradeArr.push(10);
+          }
+          else{
+            gradeArr.push(grades[j].value);
+
+          }
 
         }
       }
     }
+    console.log(gradeArr);
     console.log(ruletext)
     if (ruletext.slice(-3) == "%2C") {
       ruletext = ruletext.slice(0, -3);
@@ -90,15 +108,16 @@ function valueSender() {
       if (ourRequest.readyState == 4 && ourRequest.status == 200) {
         var ourData = JSON.parse(ourRequest.responseText);
         console.log(ourData);
-        renderHTML(ourData);
+        renderHTML(ourData,gradeArr);
       }
     };
 
     ourRequest.send();
   }
 
-  function renderHTML(data) {
+  function renderHTML(data,grade) {
     sessionStorage.setItem("items", JSON.stringify(data));
+    sessionStorage.setItem("grades",JSON.stringify(grade))
     console.log(sessionStorage);
 
     window.location.href = "../assess";
