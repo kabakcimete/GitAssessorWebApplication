@@ -29,9 +29,8 @@ function valueSender() {
     var boxLink = document.getElementsByClassName("linkbox");
     var chklist = document.getElementsByClassName("cbx");
     var grades = document.getElementsByClassName("grade");
-
-    console.log(grades[0].value);
     
+
     console.log(chklist);
     var ii;
     var j;
@@ -45,12 +44,15 @@ function valueSender() {
         if (chklist[j].checked) {
           console.log(chklist[j].value);
           ruletext += chklist[j].value;
-          if (grades[j].value == ""){
-            gradeArr.push("10");
-          }
-          else{
-            gradeArr.push(grades[j].value);
+          if(grades.length!=0){
 
+            if (grades[j].value==""){
+              gradeArr.push("10");
+            }
+            else{
+              gradeArr.push(grades[j].value);
+  
+            }
           }
           
         }
@@ -58,12 +60,15 @@ function valueSender() {
         if (chklist[j].checked) {
           console.log(chklist[j].value);
           ruletext += chklist[j].value + "%2C";
-          if (grades[j].value==""){
-            gradeArr.push("10");
-          }
-          else{
-            gradeArr.push(grades[j].value);
+          if(grades.length!=0){
 
+            if (grades[j].value==""){
+              gradeArr.push("10");
+            }
+            else{
+              gradeArr.push(grades[j].value);
+  
+            }
           }
 
         }
