@@ -46,7 +46,7 @@ function valueSender() {
           console.log(chklist[j].value);
           ruletext += chklist[j].value;
           if (grades[j].value == ""){
-            gradeArr.push(10);
+            gradeArr.push("10");
           }
           else{
             gradeArr.push(grades[j].value);
@@ -59,7 +59,7 @@ function valueSender() {
           console.log(chklist[j].value);
           ruletext += chklist[j].value + "%2C";
           if (grades[j].value==""){
-            gradeArr.push(10);
+            gradeArr.push("10");
           }
           else{
             gradeArr.push(grades[j].value);
