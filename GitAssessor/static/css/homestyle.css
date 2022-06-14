@@ -61,6 +61,10 @@ label {
   font-size: 13px;
   color: white;
 }
+.grade{
+  border-radius: 5px;
+  font-size: 12px;
+}
 .assess {
   text-align: center;
 }

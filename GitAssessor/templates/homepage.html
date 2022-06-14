@@ -46,7 +46,12 @@
               value={{value}}
               />
             {%endif%}
-            <label for={{value}}>{{key}}</label><br />
+            <label for={{value}}>{{key}}</label>
+            {% if user.is_authenticated %}
+              <input type="text" class="grade" id={{value}} placeholder="Grade" size="2"/> <br />
+            {% else %}
+              <br />
+            {% endif %}
 
           {%endfor%}
           {% if user.is_authenticated%}
