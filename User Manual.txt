@@ -1,0 +1,11 @@
+the “Home page” when the user enters the site. In this page user can enter the repository links to the URL box (where it says “Enter Repository Link”). 
+When the user pastes the desired repository links and clicks to “Add” button those links will be added to the “list of added links”. 
+If user has a change of mind and wants to remove some links, it can be done by clicking to the checkbox next to the links and then pressing to the “Remove” button. 
+There is a list of rules under the “Rules” title, desired rules to be checked by the web service for each link in the list can be selected by clicking to the checkbox next to each rule. 
+If the user wants to save their rule set preferences they can click “Save” button after checking the desired rules. If the user wants to type in the grades for each rule, 
+those little “Grade” text boxes can be used. When grades are entered, unselected rules’ grades will be discarded and if there is any selected rule with empty grades text box, 
+application will fill it with 10 automatically. When everything is done, user can press to the “Assess” button to open “Assessment Report Page”.
+
+the “Assessment Report Page” which is created when the “Assess” button is clicked in “Home Page”. This page shows the results of checking rules for each repo links by the web service for 
+user to analyze. In the report, selected rules by the user can be seen and each participant student for that repository is graded by whether they have obeyed to that specific rule or not. 
+As the report goes on, mistakes that have been made can be seen. In the bottom of the screen user can see the visualized version of the assessment for each contributor.

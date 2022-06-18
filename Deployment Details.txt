@@ -1,0 +1,5 @@
+Our Web Service and Web Application are uploaded to GitHub as Public Repositories. 
+We have uploaded our Web Service to a Cloud Server, which is named Deta, 
+but we are using our Web Application local. The communication link of our 
+Web Service is done by this https://tvfqrp.deta.dev/ link. The Web Application 
+generates a request URL using this URL and gets the response and generates an Assessment Report.
