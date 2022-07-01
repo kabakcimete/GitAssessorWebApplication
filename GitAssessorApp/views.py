@@ -23,10 +23,14 @@ def home(request):
 		loggeduser=request.user
 		#return HttpResponse(request.user.id)
 		print(loggeduser)
-		userObj=Checkedrules.objects.get(user=loggeduser)
 		if Checkedrules.objects.filter(user=loggeduser).exists():
+			userObj=Checkedrules.objects.get(user=loggeduser)
 			check_list=list(userObj.checkedrules.split(","))
 			print(check_list)
+		else:
+			n=Checkedrules(user=loggeduser,checkedrules="")
+			n.save()
+			return render(request,"homepage.html",{"rules":rules})
 
 		if request.method=="POST":
 			
@@ -39,13 +43,13 @@ def home(request):
 				userObj.checkedrules=chkbox
 				userObj.save()
 				print(userObj.checkedrules)
-				return redirect("../home")
+				return redirect("..")
 			else:
 				savedata=Checkedrules()
 				savedata.user=loggeduser
 				savedata.checkedrules=chkbox
 				savedata.save()
-				return redirect("../home")
+				return redirect("..")
 
 		return render(request,"homepage.html",{"user_rules":check_list,"rules":rules})
 	else:
@@ -63,7 +67,7 @@ def register_request(request):
          user=form.save()
          login(request,user)
          messages.success(request,"Registration successful.")
-         return redirect("../home/")
+         return redirect("..")
       messages.error(request,"Unsuccesful registration. Invalid information.")
    form = NewUserForm()
    return render(request=request, template_name="register.html",context={"register_form":form})
@@ -78,7 +82,7 @@ def login_request(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("../home/")
+				return redirect("..")
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
@@ -89,4 +93,4 @@ def login_request(request):
 def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
-	return redirect("../home/")
+	return redirect("..")
